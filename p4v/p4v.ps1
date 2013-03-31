@@ -31,7 +31,8 @@ if (-not (Test-Path $env:AppData\p4v\cache)) {
 
 switch ($command)
 {
-    { @("install", "update", "list") -contains $_ } {Run-NuGet install -PackageName $packageName -Source $source -Version $Version $global}
+    "install" {P4V-Install $packageName $source $Version $global}
+    { @("update", "list") -contains $_ } {Run-NuGet $command -PackageName $packageName -Source $source -Version $Version $global}
     "uninstall" {}
     "pack" {P4V-Pack}
     default {Write-Host "Please, specify the command: install, update, list, uninstall, pack"}

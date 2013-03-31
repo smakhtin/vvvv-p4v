@@ -27,7 +27,7 @@ function Run-NuGet {
             $arguments += "$PackageName -OutputDirectory "
 
             if ($global) {
-                $arguments += "GLOBALPATH "
+                $arguments += "$globalPath "
             }
             else {
                 $arguments += "$localPath "
@@ -38,10 +38,10 @@ function Run-NuGet {
             $arguments += "-RepositoryPath "
 
             if ($global) {
-                $arguments += "GLOBALPATH "
+                $arguments += "$globalPath "
             }
             else {
-                $arguments += "LOCALPATH "
+                $arguments += "$localPath "
             }
         }
         list
