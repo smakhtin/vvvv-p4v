@@ -2,11 +2,10 @@ function P4V-Install {
     param(
         [string] $packageName,
         [string] $source = "",
-        [string] $version = "",
-        [switch] $global
+        [string] $version = ""
     )
 
-    Run-Nuget "install" -PackageName $packageName -Source $source -Version $Version $global
+    Run-Nuget "install" -PackageName $packageName -Source $source -Version $version
 
     if ($global) {
         $packagesDir = $globalPath
@@ -14,6 +13,9 @@ function P4V-Install {
     else {
         $packagesDir = $localPath
     }
+
+    Write-Debug $global
+    Write-Debug $packagesDir
 
     $folderName = Get-ChildItem $packagesDir -Filter "$packageName*" -Name
     $installationDir = Join-Path $packagesDir $folderName

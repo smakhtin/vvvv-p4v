@@ -7,9 +7,7 @@ function Run-NuGet {
         [string]$PackageName,
 
         [parameter()]
-        [string]$Version,
-        
-        [bool]$global
+        [string]$Version
     )
 
     #Building arguments string

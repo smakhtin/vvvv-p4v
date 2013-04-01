@@ -9,6 +9,8 @@ param(
 )
 
 $p4vDir = (Split-Path -parent $MyInvocation.MyCommand.Definition)
+#Write-Debug $PSCommandPath
+
 $cacheDir = Join-Path $env:AppData "p4v\cache"
 $vvvv45Dir = Split-Path -parent $p4vDir
 $invocationDir = Get-Location
@@ -31,8 +33,8 @@ if (-not (Test-Path $env:AppData\p4v\cache)) {
 
 switch ($command)
 {
-    "install" {P4V-Install $packageName $source $Version $global}
-    { @("update", "list") -contains $_ } {Run-NuGet $command -PackageName $packageName -Source $source -Version $Version $global}
+    "install" {P4V-Install $packageName $source $Version}
+    { @("update", "list") -contains $_ } {Run-NuGet $command -PackageName $packageName -Source $source -Version $Version $true}
     "uninstall" {}
     "pack" {P4V-Pack}
     default {Write-Host "Please, specify the command: install, update, list, uninstall, pack"}
